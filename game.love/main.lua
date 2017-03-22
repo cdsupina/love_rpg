@@ -1,14 +1,10 @@
 require 'player'
 require 'areas'
-require 'map'
 require 'constants'
 
 function love.load()
 	love.window.setMode(window_width,window_height)
 	love.window.setTitle(window_name)
-	map = Map(starting_area)
-	map:addArea(area1)
-	map:addArea(area2)
 	p = Player(tile_size,tile_size,2,map)
 end
 

@@ -79,6 +79,15 @@ function Player:moveUp(area)
 
 	if self.y % (tile_size) == 0 then
 		if left_corner_tile.traverseable and right_corner_tile.traverseable then
+			
+			--check if moving into a TeleTile in which case it will teleport to the specified area and location
+			if left_corner_tile.tile_type == 'tele' then
+				left_corner_tile:teleport(self.map,self)
+			elseif right_corner_tile.tile_type == 'tele' then
+				right_corner_tile:teleport(self.map,self)
+			end
+
+
 			self.y = self.y - self.speed
 		end
 	else
@@ -92,6 +101,14 @@ function Player:moveDown(area)
 
 	if self.y % tile_size == 0 then
 		if left_corner_tile.traverseable and right_corner_tile.traverseable then
+
+			--check if moving into a TeleTile in which case it will teleport to the specified area and location
+			if left_corner_tile.tile_type == 'tele' then
+				left_corner_tile:teleport(self.map,self)
+			elseif right_corner_tile.tile_type == 'tele' then
+				right_corner_tile:teleport(self.map,self)
+			end
+
 			self.y = self.y + self.speed
 		end
 	else

@@ -1,3 +1,4 @@
+require 'map'
 require 'area'
 require 'tile'
 require 'constants'
@@ -22,6 +23,14 @@ water_tile = AnimatedTile('water',water_tile_path,false,1)
 starting_area = Area(grass_tile)
 area1 = Area(grass_tile)
 area2 = Area(grass_tile)
+area3 = Area(grass_tile)
+area4 = Area(grass_tile)
+
+map = Map(starting_area)
+map:addArea(area1)
+map:addArea(area2)
+map:addArea(area3)
+map:addArea(area4)
 
 --starting area
 
@@ -35,6 +44,16 @@ end
 for i=1, 2 do
 	starting_area_teletiles[i+2] = TeleTile('tele_gravel',gravel_tile_path,true, 3,1,i+13)
 	starting_area:setTile(40,i+14,starting_area_teletiles[i+2])
+end
+
+for i=1, 2 do
+	starting_area_teletiles[i+4] = TeleTile('tele_gravel',gravel_tile_path,true,4,i+20,28)
+	starting_area:setTile(i+19,1,starting_area_teletiles[i+4])
+end
+
+for i=1, 2 do 
+	starting_area_teletiles[i+6] = TeleTile('tele_gravel',gravel_tile_path,true,5,i+20,2)
+	starting_area:setTile(i+19,30,starting_area_teletiles[i+6])
 end
 
 for i=1, 14 do
@@ -120,3 +139,4 @@ for i=1, 2 do
 	area2:setTile(1,i+14,area2_teletiles[i])
 end
 
+--area 3
