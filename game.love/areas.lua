@@ -47,12 +47,12 @@ for i=1, 2 do
 end
 
 for i=1, 2 do
-	starting_area_teletiles[i+4] = TeleTile('tele_gravel',gravel_tile_path,true,4,i+20,28)
+	starting_area_teletiles[i+4] = TeleTile('tele_gravel',gravel_tile_path,true,4,i+18,28)
 	starting_area:setTile(i+19,1,starting_area_teletiles[i+4])
 end
 
 for i=1, 2 do 
-	starting_area_teletiles[i+6] = TeleTile('tele_gravel',gravel_tile_path,true,5,i+20,2)
+	starting_area_teletiles[i+6] = TeleTile('tele_gravel',gravel_tile_path,true,5,i+18,1)
 	starting_area:setTile(i+19,30,starting_area_teletiles[i+6])
 end
 
@@ -140,3 +140,15 @@ for i=1, 2 do
 end
 
 --area 3
+area3_teletiles = {}
+for i=1, 2 do
+	area3_teletiles[i] = TeleTile('tele_gravel',gravel_tile_path,true,1,18+i,1)
+	area3:setTile(19+i, 30, area3_teletiles[i])
+end
+
+--area 4
+area4_teletiles = {}
+for i=1, 2 do
+	area4_teletiles[i] = TeleTile('tele_gravel',gravel_tile_path,true,1,18+i,28)
+	area4:setTile(19+i,1,area4_teletiles[i])
+end

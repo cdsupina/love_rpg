@@ -15,6 +15,7 @@ function Tile:_init(name ,image_path, traverseable)
 	self.image = love.graphics.newImage(image_path)
 	self.traverseable = traverseable
 	self.tile_type = 'static'
+	self.animated = false
 	self.name = name
 end
 
@@ -35,6 +36,7 @@ function AnimatedTile:_init(name, image_path, traverseable, animation_delay)
 	self.animation_delay = animation_delay
 	self.animation = newAnimation(self.image,16,16,self.animation_delay,0)
 	self.tile_type = 'animated'
+	self.animated = true
 	self.name = name
 end
 
@@ -53,6 +55,7 @@ setmetatable(TeleTile, {
 function TeleTile:_init(name, image_path, traverseable, target_index, target_x, target_y)
 	Tile._init(self, name, image_path, traverseable)
 	self.tile_type = 'tele'
+	self.animated = false
 	self.target_index = target_index
 	self.target_x = target_x
 	self.target_y = target_y

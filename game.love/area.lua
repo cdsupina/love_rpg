@@ -1,4 +1,5 @@
 require 'constants'
+
 Area = {}
 Area.__index = Area
 
@@ -20,7 +21,7 @@ function Area:_init(ground)
 	self.tiles = self:initTiles()
 end
 
---fills the entire area with the default 'ground' tile
+--fills every tile in the area with the default 'ground' tile
 function Area:initTiles()
 	result = {}
 	for x=1, self.cols do
@@ -48,9 +49,9 @@ end
 function Area:draw()
 	for x=0, self.cols-1 do
 		for y=0, self.rows-1 do
-			if self.tiles[x+1][y+1].tile_type == 'static' or self.tiles[x+1][y+1].tile_type == 'tele' then
+			if not self.tiles[x+1][y+1].animated then
 				love.graphics.draw(self.tiles[x+1][y+1].image,x*tile_size,y*tile_size)
-			elseif self.tiles[x+1][y+1].tile_type == 'animated' then
+			elseif self.tiles[x+1][y+1].animated then
 				self.tiles[x+1][y+1].animation:draw(x*tile_size,y*tile_size)
 			end
 		end
