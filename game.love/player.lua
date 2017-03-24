@@ -18,6 +18,7 @@ function Player:_init(x, y, speed, map)
 	self.y = y
 	self.speed = speed
 	self.map = map
+  self.direction = 'down'
 end
 
 --tostring function automatically create reference to self
@@ -32,6 +33,7 @@ end
 
 --move functions
 function Player:moveRight(area)
+  self.direction = 'right'
 	top_corner_tile = area:getTile(self.x+(tile_size*2),self.y+1)
 	bottom_corner_tile = area:getTile(self.x+(tile_size*2),self.y+(tile_size-1))
 
@@ -53,6 +55,7 @@ function Player:moveRight(area)
 end
 
 function Player:moveLeft(area)
+  self.direction = 'left'
 	top_corner_tile = area:getTile(self.x,self.y+1)
 	bottom_corner_tile = area:getTile(self.x,self.y+(tile_size-1))
 
@@ -74,6 +77,7 @@ function Player:moveLeft(area)
 end
 
 function Player:moveUp(area)
+  self.direction = 'up'
 	left_corner_tile = area:getTile(self.x+1,self.y)
 	right_corner_tile = area:getTile(self.x+(tile_size-1),self.y)
 
@@ -96,6 +100,7 @@ function Player:moveUp(area)
 end
 
 function Player:moveDown(area)
+  self.direction = 'down'
 	left_corner_tile = area:getTile(self.x+1,self.y+(tile_size*2))
 	right_corner_tile = area:getTile(self.x+(tile_size-1),self.y+(tile_size*2))
 

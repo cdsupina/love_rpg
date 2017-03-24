@@ -1,6 +1,7 @@
 require 'player'
 require 'areas'
 require 'constants'
+require 'object'
 
 function love.load()
 	love.window.setMode(window_width,window_height)
@@ -10,7 +11,13 @@ end
 
 function love.update(dt)
 	p:behave(map)
-	map.current_area:update(dt)
+	map.current_area:update(dt, p)
+end
+
+function love.keyreleased(key)
+  if key == 'e' then
+    print(map.current_area.closest_object:examine())
+  end
 end
 
 function love.draw()

@@ -2,22 +2,26 @@ require 'map'
 require 'area'
 require 'tile'
 require 'constants'
+require 'object'
 
-grass_tile = Tile('grass',grass_tile_path,true)
-metal_wall_tile = Tile('metal wall',metal_wall_tile_path,false)
-brick_wall_tile = Tile('brick wall',brick_wall_tile_path,false)
-horizontal_log_tile = Tile('horizontal log',horizontal_log_tile_path,false)
-vertical_log_tile = Tile('vertical log',vertical_log_tile_path,false)
-horizontal_log_left_tile = Tile('left end log',horizontal_log_left_tile_path,false)
-horizontal_log_right_tile = Tile('right end log',horizontal_log_right_tile_path,false)
-vertical_log_top_tile = Tile('top end log',vertical_log_top_tile_path,false)
-vertical_log_bottom_tile = Tile('bottom end log',vertical_log_bottom_tile_path,false)
-plank_floor_tile = Tile('plank floor',plank_floor_tile_path,true)
-gravel_tile = Tile('gravel floor',gravel_tile_path,true)
-downstairs_tile = Tile('downstairs',downstairs_tile_path,true)
-bed_top_tile = Tile('top bed',bed_top_tile_path,false)
-bed_bottom_tile = Tile('bottom bed',bed_bottom_tile_path,false)
-water_tile = AnimatedTile('water',water_tile_path,false,1)
+--tiles
+grass_tile = Tile('grass',grass_tile_image,true)
+metal_wall_tile = Tile('metal wall',metal_wall_tile_image,false)
+brick_wall_tile = Tile('brick wall',brick_wall_tile_image,false)
+horizontal_log_tile = Tile('horizontal log',horizontal_log_tile_image,false)
+vertical_log_tile = Tile('vertical log',vertical_log_tile_image,false)
+horizontal_log_left_tile = Tile('left end log',horizontal_log_left_tile_image,false)
+horizontal_log_right_tile = Tile('right end log',horizontal_log_right_tile_image,false)
+vertical_log_top_tile = Tile('top end log',vertical_log_top_tile_image,false)
+vertical_log_bottom_tile = Tile('bottom end log',vertical_log_bottom_tile_image,false)
+plank_floor_tile = Tile('plank floor',plank_floor_tile_image,true)
+gravel_tile = Tile('gravel floor',gravel_tile_image,true)
+water_tile = AnimatedTile('water',water_tile_image,false,1)
+
+--object
+downstairs_object = Object('downstairs', downstairs_object_image, true, function() print('Go downstairs?') end)
+bed_top_object = Object('bed_top', bed_top_object_image, false, function() print('this is a bed top') end)
+bed_bottom_object = Object('bed_bottom', bed_bottom_object_image, false, function() print('this is a bed bottom') end)
 
 
 starting_area = Area(grass_tile)
@@ -37,22 +41,22 @@ map:addArea(area4)
 --area specific tiles
 starting_area_teletiles = {}
 for i=1, 2 do
-	starting_area_teletiles[i] = TeleTile('tele_gravel',gravel_tile_path,true, 2,38,i+13)
+	starting_area_teletiles[i] = TeleTile('tele_gravel',gravel_tile_image,true, 2,38,i+13)
 	starting_area:setTile(1,i+14,starting_area_teletiles[i])
 end
 
 for i=1, 2 do
-	starting_area_teletiles[i+2] = TeleTile('tele_gravel',gravel_tile_path,true, 3,1,i+13)
+	starting_area_teletiles[i+2] = TeleTile('tele_gravel',gravel_tile_image,true, 3,1,i+13)
 	starting_area:setTile(40,i+14,starting_area_teletiles[i+2])
 end
 
 for i=1, 2 do
-	starting_area_teletiles[i+4] = TeleTile('tele_gravel',gravel_tile_path,true,4,i+18,28)
+	starting_area_teletiles[i+4] = TeleTile('tele_gravel',gravel_tile_image,true,4,i+18,28)
 	starting_area:setTile(i+19,1,starting_area_teletiles[i+4])
 end
 
 for i=1, 2 do 
-	starting_area_teletiles[i+6] = TeleTile('tele_gravel',gravel_tile_path,true,5,i+18,1)
+	starting_area_teletiles[i+6] = TeleTile('tele_gravel',gravel_tile_image,true,5,i+18,1)
 	starting_area:setTile(i+19,30,starting_area_teletiles[i+6])
 end
 
@@ -115,40 +119,42 @@ for x=20, 21 do
 	end
 end
 
-starting_area:setTile(9,5,downstairs_tile)
-starting_area:setTile(5,5,bed_top_tile)
-starting_area:setTile(5,6,bed_bottom_tile)
+starting_area:setObject(9,5,downstairs_object)
+starting_area:setObject(5,5,bed_top_object)
+starting_area:setObject(5,6,bed_bottom_object)
 
 for x=30, 39 do
   for y=2, 5 do
     starting_area:setTile(x,y,water_tile)
   end
 end
+--for testing interacting with objects
+starting_area.closest_object = downstairs
 
 --area 1
 area1_teletiles = {}
 for i=1, 2 do
-	area1_teletiles[i] = TeleTile('tele_gravel',gravel_tile_path,true, 1,1,i+13)
+	area1_teletiles[i] = TeleTile('tele_gravel',gravel_tile_image,true, 1,1,i+13)
 	area1:setTile(40,i+14,area1_teletiles[i])
 end
 
 --area 2
 area2_teletiles = {}
 for i=1, 2 do
-	area2_teletiles[i] = TeleTile('tele_gravel',gravel_tile_path,true, 1,38,i+13)
+	area2_teletiles[i] = TeleTile('tele_gravel',gravel_tile_image,true, 1,38,i+13)
 	area2:setTile(1,i+14,area2_teletiles[i])
 end
 
 --area 3
 area3_teletiles = {}
 for i=1, 2 do
-	area3_teletiles[i] = TeleTile('tele_gravel',gravel_tile_path,true,1,18+i,1)
+	area3_teletiles[i] = TeleTile('tele_gravel',gravel_tile_image,true,1,18+i,1)
 	area3:setTile(19+i, 30, area3_teletiles[i])
 end
 
 --area 4
 area4_teletiles = {}
 for i=1, 2 do
-	area4_teletiles[i] = TeleTile('tele_gravel',gravel_tile_path,true,1,18+i,28)
+	area4_teletiles[i] = TeleTile('tele_gravel',gravel_tile_image,true,1,18+i,28)
 	area4:setTile(19+i,1,area4_teletiles[i])
 end
