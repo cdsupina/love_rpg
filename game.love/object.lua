@@ -1,3 +1,7 @@
+--[[
+Carlo Supina
+]]
+
 require 'constants'
 
 Object = {}
@@ -11,6 +15,10 @@ setmetatable(Object, {
 	end,
 })
 
+-- Create new object
+-- @param name Name of the object
+-- @param image Image to represent the object
+-- @param interact The function to execute when the object is enteracted with
 function Object:_init(name, image, traverseable, interact)
 	self.name = name
 	self.image = image
@@ -18,7 +26,7 @@ function Object:_init(name, image, traverseable, interact)
 	self.interact = interact
 end
 
---print the name of the object as well as the interact function given in the initialization
+-- Object is examined by the player
 function Object:examine()
 		print('This is a ' .. self.name)
 		self.interact()

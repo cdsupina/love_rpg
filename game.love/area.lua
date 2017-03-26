@@ -1,5 +1,8 @@
-require 'constants'
+--[[
+Carlo Supina
+]]
 
+require 'constants'
 
 Area = {}
 Area.__index = Area
@@ -12,9 +15,8 @@ setmetatable(Area, {
 	end,
 })
 
---Area tables contain a multidimensional table of tiles
---to initialize the player must enter a default tile as a parameter
---the entire area will be filled with this tile
+-- Create new area
+-- @param ground The desired default tile for the area
 function Area:_init(ground)
 	self.rows = tile_rows
 	self.cols = tile_cols
@@ -24,7 +26,8 @@ function Area:_init(ground)
   self.closest_object = 'nothing'
 end
 
---fills every tile in the area with the default 'ground' tile
+-- Set every tile to the default ground tile
+-- @return Multidimensional array of tiles
 function Area:initTiles()
 	result = {}
 	for x=1, self.cols do
@@ -37,7 +40,8 @@ function Area:initTiles()
 	return result
 end
 
---fills every objects space with a blank table
+-- Set every object space in the area to nil
+-- @return Multidimensional array of object spaces
 function Area:initObjects()
 	result = {}
 	for x=1, self.cols do
@@ -50,11 +54,18 @@ function Area:initObjects()
   return result
 end
 
---sets the tile at the tile coordinate to the specified tile
+-- Set a tile to a different tile
+-- @param x The x value of the desired tile
+-- @param y The y value of the desired tile
+-- @param tile The desired tile to set the space to
 function Area:setTile(x, y, tile)
 	self.tiles[x][y] = tile
 end
 
+-- Set object to a space
+-- @param x The x value of the desired location
+-- @param y The y value of the desired location
+-- @param object The desired object to set to the location
 function Area:setObject(x,y, object)
   self.objects[x][y] = object
 end
@@ -84,7 +95,7 @@ function Area:update(dt, player)
   --' player_left: '..player_left.x..','..player_right.y..' player_right: '..player_right.x..','..player_right.y)
 end
 
---draw all of the tiles in the area
+-- Draw all of the tiles in an area
 function Area:drawTiles()
 	for x=0, self.cols-1 do
 		for y=0, self.rows-1 do
@@ -97,7 +108,7 @@ function Area:drawTiles()
 	end
 end
 
---draw all of the objects in the area
+-- Draw all of the objects in an area
 function Area:drawObjects()
   for x=0, self.cols-1 do
     for y=0, self.rows-1 do
@@ -108,14 +119,16 @@ function Area:drawObjects()
   end
 end
 
---all of the tiles and objects in the area
+-- Draw everything in the area
 function Area:draw()
   self:drawTiles()
   self:drawObjects()
 end
 
---takes in a coordinate on the window and returns appropriate tile 
---by dividing the coordinate by the tile width and rounding up
+-- Converts pixel coordinate to tile coordinate
+-- @param x The x coordinate of the pixel
+-- @param y The y coordinate of the pixel
+-- @return The tile at the coordinate specified
 function Area:getTile(x,y)
 	return self.tiles[math.ceil(x/tile_size)][math.ceil(y/tile_size)]
 end

@@ -1,3 +1,7 @@
+--[[
+Carlo Supina
+]]
+
 require 'player'
 require 'areas'
 require 'constants'
@@ -10,7 +14,7 @@ function love.load()
 end
 
 function love.update(dt)
-	p:behave(map)
+	p:behave()
 	map.current_area:update(dt, p)
 end
 
