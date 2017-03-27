@@ -41,7 +41,18 @@ function Player:fire()
 	print("fire")
 end
 
--- Move the player to the right
+-- Checks if the either of two tiles is a teleporting tile and teleports the player if necessary
+-- @param tile1 The first tile to check
+-- @param tile2 The second tile to check
+function Player:teleport(tile1, tile2)
+  if tile1.teleporting then
+    tile1:teleport(self.map,self)
+  elseif tile2.teleporting then
+    tile2:teleport(self.map,self)
+  end
+end
+
+-- Move the player to the right if the path is traverseable
 function Player:moveRight()
   self.direction = 'right'
 	top_corner_tile = self.map.current_area:getTile(self.x+(tile_size*2),self.y+1)
@@ -49,14 +60,8 @@ function Player:moveRight()
 
 	if self.x % tile_size == 0 then
 		if top_corner_tile.traverseable and bottom_corner_tile.traverseable then
-			
-			--check if moving into a TeleTile in which case it will teleport to the specified area and location
-			if top_corner_tile.teleporting then
-				top_corner_tile:teleport(self.map,self)
-			elseif bottom_corner_tile.teleporting then
-				bottom_corner_tile:teleport(self.map,self)
-			end
 
+			self:teleport(top_corner_tile, bottom_corner_tile)
 			self.x = self.x + self.speed
 		end
 	else
@@ -64,7 +69,7 @@ function Player:moveRight()
 	end
 end
 
--- Move the player to the left
+-- Move the player to the left if the path is traverseable
 function Player:moveLeft()
   self.direction = 'left'
 	top_corner_tile = self.map.current_area:getTile(self.x,self.y+1)
@@ -73,13 +78,7 @@ function Player:moveLeft()
 	if self.x % tile_size == 0 then
 		if top_corner_tile.traverseable and bottom_corner_tile.traverseable then
 			
-			--check if moving into a TeleTile in which case it will teleport to the specified area and location
-			if top_corner_tile.teleporting then
-				top_corner_tile:teleport(self.map,self)
-			elseif bottom_corner_tile.teleporting then
-				bottom_corner_tile:teleport(self.map,self)
-			end
-
+      self:teleport(top_corner_tile, bottom_corner_tile)
 			self.x = self.x - self.speed
 		end
 	else
@@ -87,7 +86,7 @@ function Player:moveLeft()
 	end
 end
 
--- Move the player up
+-- Move the player up if the path is traverseable
 function Player:moveUp()
   self.direction = 'up'
 	left_corner_tile = self.map.current_area:getTile(self.x+1,self.y)
@@ -96,14 +95,7 @@ function Player:moveUp()
 	if self.y % (tile_size) == 0 then
 		if left_corner_tile.traverseable and right_corner_tile.traverseable then
 			
-			--check if moving into a TeleTile in which case it will teleport to the specified area and location
-			if left_corner_tile.teleporting then
-				left_corner_tile:teleport(self.map,self)
-			elseif right_corner_tile.teleporting then
-				right_corner_tile:teleport(self.map,self)
-			end
-
-
+      self:teleport(left_corner_tile, right_corner_tile)
 			self.y = self.y - self.speed
 		end
 	else
@@ -111,7 +103,7 @@ function Player:moveUp()
 	end
 end
 
--- Move the player down
+-- Move the player down if the path is traverseable
 function Player:moveDown()
   self.direction = 'down'
 	left_corner_tile = self.map.current_area:getTile(self.x+1,self.y+(tile_size*2))
@@ -120,13 +112,7 @@ function Player:moveDown()
 	if self.y % tile_size == 0 then
 		if left_corner_tile.traverseable and right_corner_tile.traverseable then
 
-			--check if moving into a TeleTile in which case it will teleport to the specified area and location
-			if left_corner_tile.teleporting then
-				left_corner_tile:teleport(self.map,self)
-			elseif right_corner_tile.teleporting then
-				right_corner_tile:teleport(self.map,self)
-			end
-
+      self:teleport(left_corner_tile, right_corner_tile)
 			self.y = self.y + self.speed
 		end
 	else

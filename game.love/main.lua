@@ -12,7 +12,7 @@ require 'constants'
 function love.load()
 	love.window.setMode(window_width,window_height)
 	love.window.setTitle(window_name)
-	p = Player(tile_size,tile_size,2,map)
+	p = Player(100,100,2,map)
 end
 
 -- called every tick
