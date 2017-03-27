@@ -1,13 +1,20 @@
---window properties
+--[[
+Carlo Supina
+www.github.com/cdsupina
+cdsupina@gmail.com
+]]
+
+-- WINDOW PROPERTIES
 window_width = 640
 window_height = 480
 window_name = 'RPG'
---tile properties
+
+-- TILE PROPERTIES
 tile_size = 16
 tile_rows = 30
 tile_cols = 40
 
---tiles
+-- TILE IMAGES
 tile_directory = 'assets/images/tiles/'
 grass_tile_image = love.graphics.newImage(tile_directory .. 'grass.png')
 metal_wall_tile_image = love.graphics.newImage(tile_directory .. 'wall.png')
@@ -22,7 +29,7 @@ plank_floor_tile_image = love.graphics.newImage(tile_directory .. 'plank_floor.p
 gravel_tile_image = love.graphics.newImage(tile_directory .. 'gravel.png')
 water_tile_image = love.graphics.newImage(tile_directory .. 'water.png')
 
---objects
+-- OBJECT IMAGES
 object_directory = 'assets/images/objects/'
 downstairs_object_image = love.graphics.newImage(object_directory .. 'downstairs.png')
 bed_top_object_image = love.graphics.newImage(object_directory .. 'bed_top.png')

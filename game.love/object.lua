@@ -1,5 +1,7 @@
 --[[
 Carlo Supina
+www.github.com/cdsupina
+cdsupina@gmail.com
 ]]
 
 require 'constants'
@@ -18,6 +20,7 @@ setmetatable(Object, {
 -- Create new object
 -- @param name Name of the object
 -- @param image Image to represent the object
+-- @param traverseable Whether the object should be traverseable by players
 -- @param interact The function to execute when the object is enteracted with
 function Object:_init(name, image, traverseable, interact)
 	self.name = name

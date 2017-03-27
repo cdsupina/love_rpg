@@ -1,14 +1,14 @@
 --[[
 Carlo Supina
+www.github.com/cdsupina
+cdsupina@gmail.com
 ]]
 
 require 'constants'
 
---table to represent class
 Player = {}
 Player.__index = Player
 
---set metafunction to automatically initialize the object
 setmetatable(Player, {
 	__call = function(cls, ...)
 		local self = setmetatable({}, cls)
@@ -51,9 +51,9 @@ function Player:moveRight()
 		if top_corner_tile.traverseable and bottom_corner_tile.traverseable then
 			
 			--check if moving into a TeleTile in which case it will teleport to the specified area and location
-			if top_corner_tile.tile_type == 'tele' then
+			if top_corner_tile.teleporting then
 				top_corner_tile:teleport(self.map,self)
-			elseif bottom_corner_tile.tile_type == 'tele' then
+			elseif bottom_corner_tile.teleporting then
 				bottom_corner_tile:teleport(self.map,self)
 			end
 
@@ -74,9 +74,9 @@ function Player:moveLeft()
 		if top_corner_tile.traverseable and bottom_corner_tile.traverseable then
 			
 			--check if moving into a TeleTile in which case it will teleport to the specified area and location
-			if top_corner_tile.tile_type == 'tele'then
+			if top_corner_tile.teleporting then
 				top_corner_tile:teleport(self.map,self)
-			elseif bottom_corner_tile.tile_type == 'tele' then
+			elseif bottom_corner_tile.teleporting then
 				bottom_corner_tile:teleport(self.map,self)
 			end
 
@@ -97,9 +97,9 @@ function Player:moveUp()
 		if left_corner_tile.traverseable and right_corner_tile.traverseable then
 			
 			--check if moving into a TeleTile in which case it will teleport to the specified area and location
-			if left_corner_tile.tile_type == 'tele' then
+			if left_corner_tile.teleporting then
 				left_corner_tile:teleport(self.map,self)
-			elseif right_corner_tile.tile_type == 'tele' then
+			elseif right_corner_tile.teleporting then
 				right_corner_tile:teleport(self.map,self)
 			end
 
@@ -121,9 +121,9 @@ function Player:moveDown()
 		if left_corner_tile.traverseable and right_corner_tile.traverseable then
 
 			--check if moving into a TeleTile in which case it will teleport to the specified area and location
-			if left_corner_tile.tile_type == 'tele' then
+			if left_corner_tile.teleporting then
 				left_corner_tile:teleport(self.map,self)
-			elseif right_corner_tile.tile_type == 'tele' then
+			elseif right_corner_tile.teleporting then
 				right_corner_tile:teleport(self.map,self)
 			end
 
