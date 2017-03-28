@@ -9,6 +9,7 @@ require 'area'
 require 'tile'
 require 'constants'
 require 'object'
+require 'area_helper'
 
 -- DEFINITIONS OF TILES
 grass_tile = Tile('grass',grass_tile_image,true)
@@ -89,6 +90,9 @@ for i=2, 19 do
 	starting_area:setTile(i,30,brick_wall_tile)
 	starting_area:setTile(41-i,30,brick_wall_tile)
 end
+
+-- arrempt to set a wall from the area_helper function (currently not working)
+wall(staring_area, brick_wall_tile, 2, 'up', 5, 15)
 
 -- log cabin frame
 starting_area:setTile(3,4,horizontal_log_left_tile)

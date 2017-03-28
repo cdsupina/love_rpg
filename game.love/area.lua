@@ -1,5 +1,7 @@
 --[[
 Carlo Supina
+www.github.com/cdsupina
+cdsupina@gmail.com
 ]]
 
 require 'constants'

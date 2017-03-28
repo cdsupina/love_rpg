@@ -54,69 +54,92 @@ end
 
 -- Move the player to the right if the path is traverseable
 function Player:moveRight()
+
+  -- set direction proper (should be used for animations and object detection)
   self.direction = 'right'
+
+  -- define the relevant corners
 	top_corner_tile = self.map.current_area:getTile(self.x+(tile_size*2),self.y+1)
 	bottom_corner_tile = self.map.current_area:getTile(self.x+(tile_size*2),self.y+(tile_size-1))
 
+  -- define movement
+  move = function()
+    self.x = self.x + self.speed
+  end
+
 	if self.x % tile_size == 0 then
 		if top_corner_tile.traverseable and bottom_corner_tile.traverseable then
-
 			self:teleport(top_corner_tile, bottom_corner_tile)
-			self.x = self.x + self.speed
+      move()
 		end
 	else
-		self.x = self.x + self.speed
+    move()
 	end
 end
 
 -- Move the player to the left if the path is traverseable
 function Player:moveLeft()
+
   self.direction = 'left'
+
 	top_corner_tile = self.map.current_area:getTile(self.x,self.y+1)
 	bottom_corner_tile = self.map.current_area:getTile(self.x,self.y+(tile_size-1))
 
+  move = function()
+    self.x = self.x - self.speed
+  end
+
 	if self.x % tile_size == 0 then
-		if top_corner_tile.traverseable and bottom_corner_tile.traverseable then
-			
+		if top_corner_tile.traverseable and bottom_corner_tile.traverseable then	
       self:teleport(top_corner_tile, bottom_corner_tile)
-			self.x = self.x - self.speed
+      move()
 		end
 	else
-		self.x = self.x - self.speed
+    move()
 	end
 end
 
 -- Move the player up if the path is traverseable
 function Player:moveUp()
+
   self.direction = 'up'
+
 	left_corner_tile = self.map.current_area:getTile(self.x+1,self.y)
 	right_corner_tile = self.map.current_area:getTile(self.x+(tile_size-1),self.y)
 
+  move = function()
+    self.y = self.y - self.speed 
+  end
+
 	if self.y % (tile_size) == 0 then
 		if left_corner_tile.traverseable and right_corner_tile.traverseable then
-			
       self:teleport(left_corner_tile, right_corner_tile)
-			self.y = self.y - self.speed
+      move()
 		end
 	else
-		self.y = self.y - self.speed
+    move()
 	end
 end
 
 -- Move the player down if the path is traverseable
 function Player:moveDown()
+
   self.direction = 'down'
+
 	left_corner_tile = self.map.current_area:getTile(self.x+1,self.y+(tile_size*2))
 	right_corner_tile = self.map.current_area:getTile(self.x+(tile_size-1),self.y+(tile_size*2))
 
+  move = function()
+    self.y = self.y + self.speed
+  end
+  
 	if self.y % tile_size == 0 then
 		if left_corner_tile.traverseable and right_corner_tile.traverseable then
-
       self:teleport(left_corner_tile, right_corner_tile)
-			self.y = self.y + self.speed
+      move()
 		end
 	else
-		self.y = self.y + self.speed
+    move()
 	end
 end
 
