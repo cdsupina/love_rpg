@@ -168,3 +168,31 @@ function Player:draw()
 	love.graphics.rectangle("fill",self.x,self.y,tile_size,tile_size)
 end
 
+-- Get the top of the player's range
+-- @return The x coordinate of the top of the player's range
+-- @return The y coordinate of the top of the player's range
+function Player:getRangeTop()
+  return self.x + (tile_size/2), self.y + (tile_size/4)
+end
+
+-- Get the bottom of the player's range
+-- @return The x coordinate of the bottom of the player's range
+-- @return The y coordinate of the bottom of the player's range
+function Player:getRangeBottom()
+  return self.x + (tile_size/2), self.y + ((tile_size*3)/4)
+end
+
+-- Get the left side of the player's range
+-- @return The x coordinate of the left side of the player's range
+-- @return The y coordinate of the left side of the player's range
+function Player:getRangeLeft()
+  return self.x + (tile_size/4), self.y + (tile_size/2)
+end
+
+-- Get the right side of the player's range
+-- @return The x coordinate of the right side of the player's range
+-- @return The y coordinate of the right side of the player's range
+function Player:getRangeRight()
+  return self.x + ((tile_size*3)/4), self.y + (tile_size/2)
+end
+

@@ -72,29 +72,10 @@ function Area:setObject(x,y, object)
   self.objects[x][y] = object
 end
 
---updates all tiles containing animations
-function Area:update(dt, player)
+-- Update the area
+-- @param dt The time between ticks in the game
+function Area:update(dt)
 	water_tile.animation:update(dt)
-
-  --player_top,_bottom,_left and _right are all coordinates of the subhitbox of the player that will be the basis of the interacting range
-  player_top = {}
-  player_top.x = player.x + (tile_size/2)
-  player_top.y = player.y + (tile_size/4)
-
-  player_bottom = {}
-  player_bottom.x = player.x + (tile_size/2)
-  player_bottom.y = player.y + ((tile_size*3)/4)
-
-  player_left = {}
-  player_left.x = player.x + (tile_size/4)
-  player_left.y = player.y + (tile_size/2)
-
-  player_right = {}
-  player_right.x = player.x + ((tile_size*3)/4) 
-  player_right.y = player.y + (tile_size/2)
-
-  --print('player_top: '..player_top.x..','..player_top.y..' player_bottom: '..player_bottom.x..','..player_bottom.y..
-  --' player_left: '..player_left.x..','..player_right.y..' player_right: '..player_right.x..','..player_right.y)
 end
 
 -- Draw all of the tiles in an area
